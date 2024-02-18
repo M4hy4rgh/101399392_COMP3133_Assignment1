@@ -7,7 +7,13 @@ const UserResolvers = {
     Query: {
         
         async login(_, { username, password }) {
-            const user = await User.findOne({ username: username });
+            const user = await User.findOne({ 
+                $or: [
+                    { username: username },
+                    { email: username }
+                ]
+                
+            });
             if (!user) {
                 return new Error("User not found");
             }

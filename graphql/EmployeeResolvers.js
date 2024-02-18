@@ -40,7 +40,7 @@ const EmployeeResolvers = {
                     first_name: employee.first_name,
                     last_name: employee.last_name,
                     email: employee.email,
-                    gender: employee.gener,
+                    gender: employee.gender,
                     salary: employee.salary,
                 });
                 return await Employee.findById(_id);

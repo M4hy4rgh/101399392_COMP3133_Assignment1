@@ -9,6 +9,12 @@ type User {
     password: String!
 }
 
+enum Gender { 
+    male,
+    female,
+    other
+}
+
 type Employee {
     _id: ID!
     first_name: String!
@@ -16,12 +22,6 @@ type Employee {
     email: String!
     gender: Gender!
     salary: Float!
-}
-
-enum Gender { 
-    male,
-    female,
-    other
 }
 
 input UserInput {
