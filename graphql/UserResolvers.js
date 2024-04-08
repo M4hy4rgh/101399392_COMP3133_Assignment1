@@ -31,9 +31,9 @@ const UserResolvers = {
             const plainPassword = user.password; // Replace with the actual user's password          
             
              // Hash the password
-            salt = bcrypt.genSaltSync(saltRounds)
-            hashedPassword = bcrypt.hashSync(plainPassword, salt)
-            
+            // salt = bcrypt.genSaltSync(saltRounds)
+            // hashedPassword =  bcrypt.hashSync(plainPassword, salt)
+            const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
             const newUser = new User({
                 username: user.username,
                 email: user.email,
