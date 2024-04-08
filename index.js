@@ -10,6 +10,8 @@ require("dotenv").config();
 async function startServer() {
     const app = express(); //Creates an Express application
 
+    app.use(cors());
+
     app.use(express.json()); //Parse JSON bodies
     app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 
@@ -21,12 +23,6 @@ async function startServer() {
     await server.start();
     server.applyMiddleware({ app, path: "/graphql" });
 
-    app.use(
-        cors({
-            origin: "https://101399392-comp3133-assig2.vercel.app",
-            credentials: true,
-        })
-    );
 
     // process.env.CONNECTION_STRING: gets the connection string from the environment variables
     const CONECTION_STRING = process.env.REACT_APP_CONECTION_STRING;
