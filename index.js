@@ -10,9 +10,6 @@ require("dotenv").config();
 async function startServer() {
     const app = express(); //Creates an Express application
 
-
-    
-
     app.use(express.json()); //Parse JSON bodies
     app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 
@@ -27,6 +24,7 @@ async function startServer() {
     app.use(
         cors({
             origin: "https://101399392-comp3133-assig2.vercel.app",
+            credentials: true,
         })
     );
 
