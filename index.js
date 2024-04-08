@@ -14,14 +14,6 @@ async function startServer() {
 
     app.use(express.json()); //Parse JSON bodies
     app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
-    app.use(function (request, response, next) {
-        response.header("Access-Control-Allow-Origin", "*");
-        response.header(
-            "Access-Control-Allow-Headers",
-            "Origin, X-Requested-With, Content-Type, Accept"
-        );
-        next();
-    });
 
     const server = new ApolloServer({
         typeDefs,
