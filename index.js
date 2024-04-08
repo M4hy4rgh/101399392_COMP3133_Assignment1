@@ -2,16 +2,16 @@ const express = require("express"); //import express
 const mongoose = require("mongoose"); //import mongoose
 const { ApolloServer } = require("apollo-server-express");
 const cors = require("cors");
-
+const http = require("http");
+const ApolloServerPluginLandingPageGraphQLPlayground =
+    require("apollo-server-core").ApolloServerPluginLandingPageGraphQLPlayground;
 const Resolvers = require("./graphql/index.js");
 const typeDefs = require("./graphql/schema.js");
 require("dotenv").config();
 
 async function startServer() {
     const app = express(); //Creates an Express application
-
-    app.use(cors());
-    
+    const httpserver = http.createServer(app);
 
     app.use(express.json()); //Parse JSON bodies
     app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
@@ -19,10 +19,18 @@ async function startServer() {
     const server = new ApolloServer({
         typeDefs,
         resolvers: Resolvers,
+        plugins: [
+            ApolloServerPluginLandingPageGraphQLPlayground({ httpserver }),
+        ],
     });
 
     await server.start();
     server.applyMiddleware({ app, path: "/graphql" });
+
+    // app.use(cors());
+    app.use("/graphql", express.json(), server.getMiddleware());
+
+
 
     // process.env.CONNECTION_STRING: gets the connection string from the environment variables
     const CONECTION_STRING = process.env.REACT_APP_CONECTION_STRING;
