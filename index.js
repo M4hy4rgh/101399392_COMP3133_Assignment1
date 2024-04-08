@@ -10,18 +10,7 @@ require("dotenv").config();
 async function startServer() {
     const app = express(); //Creates an Express application
 
-    app.use(
-        cors({
-            origin: "https://101399392-comp3133-assig2.vercel.app",
-        })
-    );
-
-    app.use((req, res, next) => {
-        console.log('Request URL:', req.originalUrl);
-        console.log('Request Type:', req.method);
-        console.log('Request Headers:', req.headers);
-        next();
-    });
+    app.use(cors());
     
 
     app.use(express.json()); //Parse JSON bodies
