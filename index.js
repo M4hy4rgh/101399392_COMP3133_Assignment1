@@ -6,26 +6,11 @@ const Resolvers = require("./graphql/index.js");
 const typeDefs = require("./graphql/schema.js");
 require("dotenv").config();
 
-const allowCors = (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-};
-
-
 async function startServer() {
     const app = express(); //Creates an Express application
 
-    // app.use(cors(
-    //     {
-    //         origin: "http://localhost:400",
-    //         credentials: true,
-    //         optionsSuccessStatus: 200
-    //     }
-    // ));
-    
-    app.use(allowCors);
+    app.use(cors());
+
     app.use(express.json()); //Parse JSON bodies
     app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 
