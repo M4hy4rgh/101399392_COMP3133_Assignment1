@@ -14,6 +14,14 @@ async function startServer() {
 
     app.use(express.json()); //Parse JSON bodies
     app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+    app.use(function (request, response, next) {
+        response.header("Access-Control-Allow-Origin", "*");
+        response.header(
+            "Access-Control-Allow-Headers",
+            "Origin, X-Requested-With, Content-Type, Accept"
+        );
+        next();
+    });
 
     const server = new ApolloServer({
         typeDefs,
@@ -22,7 +30,6 @@ async function startServer() {
 
     await server.start();
     server.applyMiddleware({ app, path: "/graphql" });
-
 
     // process.env.CONNECTION_STRING: gets the connection string from the environment variables
     const CONECTION_STRING = process.env.REACT_APP_CONECTION_STRING;
