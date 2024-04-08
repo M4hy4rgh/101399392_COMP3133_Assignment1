@@ -16,6 +16,14 @@ async function startServer() {
         })
     );
 
+    app.use((req, res, next) => {
+        console.log('Request URL:', req.originalUrl);
+        console.log('Request Type:', req.method);
+        console.log('Request Headers:', req.headers);
+        next();
+    });
+    
+
     app.use(express.json()); //Parse JSON bodies
     app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 
