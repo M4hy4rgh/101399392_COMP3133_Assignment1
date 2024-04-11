@@ -10,15 +10,15 @@ async function startServer() {
     const app = express(); //Creates an Express application
 
     app.use(cors());
-    app.use((req, res, next) => {
-        res.setHeader("Access-Control-Allow-Origin", "https://101399392-comp3133-assig2.vercel.app/graphql");
-        res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, PATCH, DELETE");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        if (req.method === "OPTIONS") {
-            return res.sendStatus(200);
-        }
-        next();
-    });
+    // app.use((req, res, next) => {
+    //     res.setHeader("Access-Control-Allow-Origin", "https://101399392-comp3133-assig2.vercel.app/graphql");
+    //     res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, PATCH, DELETE");
+    //     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    //     if (req.method === "OPTIONS") {
+    //         return res.sendStatus(200);
+    //     }
+    //     next();
+    // });
     
 
     app.use(express.json()); //Parse JSON bodies
