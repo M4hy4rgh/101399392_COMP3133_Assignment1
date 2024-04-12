@@ -28,6 +28,10 @@ async function startServer() {
     const server = new ApolloServer({
         typeDefs,
         resolvers: Resolvers,
+        cacheControl: {
+            defaultMaxAge: 60,
+        },
+        persistedQueries: false // or cache: "bounded"    
     });
 
     await server.start();
@@ -61,3 +65,5 @@ async function startServer() {
 }
 
 startServer(); //Start the server
+
+// export default startServer; //Export the startServer function
