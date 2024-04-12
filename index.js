@@ -6,8 +6,10 @@ const Resolvers = require("./graphql/index.js");
 const typeDefs = require("./graphql/schema.js");
 require("dotenv").config();
 
+const app = express(); // Move the app creation outside of startServer()
+
 async function startServer() {
-    const app = express(); //Creates an Express application
+    // const app = express(); //Creates an Express application
 
     app.use(cors());
     // app.use((req, res, next) => {
