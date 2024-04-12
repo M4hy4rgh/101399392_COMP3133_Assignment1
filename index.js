@@ -31,7 +31,8 @@ async function startServer() {
         cacheControl: {
             defaultMaxAge: 60,
         },
-        persistedQueries: false // or cache: "bounded"    
+        persistedQueries: false, // or cache: "bounded"
+        cache: "bounded" // Set cache to "bounded"
     });
 
     await server.start();
