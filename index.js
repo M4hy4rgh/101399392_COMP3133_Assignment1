@@ -1,9 +1,9 @@
-const express = require("express"); //import express
-const mongoose = require("mongoose"); //import mongoose
-const { ApolloServer } = require("apollo-server-express");
-const cors = require("cors");
-const Resolvers = require("./graphql/index.js");
-const typeDefs = require("./graphql/schema.js");
+import express, { json, urlencoded } from "express"; //import express
+import { connect } from "mongoose"; //import mongoose
+import { ApolloServer } from "apollo-server-express";
+import cors from "cors";
+import Resolvers from "./graphql/index.js";
+import typeDefs from "./graphql/schema.js";
 require("dotenv").config();
 
 async function startServer() {
@@ -22,8 +22,8 @@ async function startServer() {
 
 
 
-    app.use(express.json()); //Parse JSON bodies
-    app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+    app.use(json()); //Parse JSON bodies
+    app.use(urlencoded({ extended: true })); //Parse URL-encoded bodies
 
     const server = new ApolloServer({
         typeDefs,
@@ -43,8 +43,7 @@ async function startServer() {
 
     //Connect to the database
     // mongoose.connect: connects to the database
-    await mongoose
-        .connect(CONECTION_STRING, {
+    await connect(CONECTION_STRING, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
@@ -63,8 +62,10 @@ async function startServer() {
             `Server started on port http://localhost:${PORT}${server.graphqlPath}`
         );
     });
+    module.exports = app; 
 }
 
 startServer(); //Start the server
 
 // export default startServer; //Export the startServer function
+// export default app; 
